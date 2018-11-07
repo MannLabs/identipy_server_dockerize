@@ -29,8 +29,14 @@ RUN python manage.py createsuperuser  --no-input --username admin --email delgro
 RUN python manage.py createuser user nomail@gg.de password
 
 ## Launch the server!
-EXPOSE 9000
-CMD ["python", "manage.py", "runserver"]
+RUN pip install gunicorn
+COPY start.sh /identipy_server/start.sh
+
+EXPOSE 8000
+CMD ["bash", "start.sh"]
+
+
+#CMD ["python", "manage.py", "runserver"]
 
 
 
