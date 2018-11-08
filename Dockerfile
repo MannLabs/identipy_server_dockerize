@@ -28,6 +28,11 @@ RUN python manage.py migrate
 RUN python manage.py createsuperuser  --no-input --username admin --email delgrosso@biochem.mpg.de
 RUN python manage.py createuser user nomail@gg.de password
 
+# Edit Django Settings
+# COPY settings.py identipy_server/settings.py
+# ENV DJANGO_SETTINGS_MODULE=identipy_server.settings
+RUN echo "ALLOWED_HOSTS = ['*']" >> /identipy_server/identipy_server/settings.py
+
 ## Launch the server!
 RUN pip install gunicorn
 COPY start.sh /identipy_server/start.sh
